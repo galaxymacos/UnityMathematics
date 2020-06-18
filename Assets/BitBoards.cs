@@ -28,4 +28,23 @@ public class BitBoards : MonoBehaviour
         long mask = 1L << (row * 8 + col);
         return (mask & bitBoard) != 0;
     }
+
+    int CellCount(long bitboard)
+    {
+        // 101111
+        // 101110
+        // 101100
+        // 101000
+        // 100000
+        int count = 0;
+        long bb = bitboard;
+
+        while (bb != 0)
+        {
+            bb &= bb - 1;
+            count++;
+        }
+
+        return count;
+    }
 }
