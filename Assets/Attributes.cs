@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class Attributes : MonoBehaviour
 {
-    public static int MAGIC = 16;
-    public static int INTELLIGENCE = 8;
-    public static int CHARISMA = 4;
-    public static int FLY = 2;
+    public static int MAGIC = 16; // = 1<<4
+    public static int INTELLIGENCE = 8;    // = 1<<3
+    public static int CHARISMA = 4;    // = 1<<2
+    public static int FLY = 2;    // = 1<<1
     public static int INVISIBLE = 1;
 
     private void Start()
@@ -34,8 +34,13 @@ public class Attributes : MonoBehaviour
             // We have a match
         }
         
+        // Bit shifting
         
-        PrintBinary(attributes);
+        // 00001<<1 = 00010
+
+        BitPacking();
+        
+        // PrintBinary(attributes);
         
         
     }
@@ -59,5 +64,27 @@ public class Attributes : MonoBehaviour
         }
         print(result);
         
+    }
+
+    private void BitPacking()
+    {
+        string A = "110111";
+        string B = "10001";
+        string C = "1101";
+        int aBits = Convert.ToInt32(A, 2);
+        int bBits = Convert.ToInt32(B, 2);
+        int cBits = Convert.ToInt32(C, 2);
+
+        int packed = 0;
+        packed = packed | (aBits << 26);
+        packed = packed | (bBits << 21);
+        packed = packed | (cBits<<17);
+        
+        // bit unpacking
+        // A = (X & MaskA) >> 9
+        // B = (X & MaskB) >> 4
+        // C = (X & MaskC) 
+
+        Debug.Log(Convert.ToString(packed, 2).PadLeft(32,'0'));
     }
 }
