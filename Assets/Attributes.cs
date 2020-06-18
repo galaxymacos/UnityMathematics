@@ -41,8 +41,15 @@ public class Attributes : MonoBehaviour
         BitPacking();
         
         // PrintBinary(attributes);
-        
-        
+
+        attributes = BitToggle(attributes);
+
+    }
+
+    private int BitToggle(int attributes)
+    {
+        attributes ^= MAGIC;
+        return attributes;
     }
 
     private void PrintBinary(int binary)
@@ -86,5 +93,20 @@ public class Attributes : MonoBehaviour
         // C = (X & MaskC) 
 
         Debug.Log(Convert.ToString(packed, 2).PadLeft(32,'0'));
+    }
+}
+
+public class HitRay : MonoBehaviour
+{
+    private void Start()
+    {
+        int layerMask = 1 << 10;
+        int layerMask2 = 1 << 9;
+        layerMask |= layerMask2;
+        // Detect the layer 10
+        layerMask = ~layerMask;
+        // Detect all the layer instead of layer 10
+
+        layerMask = ~layerMask;
     }
 }
