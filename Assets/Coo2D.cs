@@ -2,10 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coo2D : MonoBehaviour
+public class Coo2D
 {
     public float x;
     public float y;
+
+    public Coo2D(float x, float y)
+    {
+        this.x = x;
+        this.y = y;
+    }
 }
 
 public class Coo3D : MonoBehaviour
